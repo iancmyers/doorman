@@ -1,0 +1,5 @@
+# When the visitor calls the app, the app will call these two numbers 
+# simultaneously and connect the visitor to whichever resident answers first
+phones: 
+  - "4155551234"
+  - "4155555678"

@@ -1,0 +1,16 @@
+# When the visitor is connected to the app, the introduction will play. At that
+# time, the visitor will be able to press '*' to indicate that they would like
+# to enter the security code. If the visitor presses '*', they will hear the 
+# securityPrompt and be able to enter the securityCode to be let in. Otherwise,
+# they will call the two phone numbers.
+
+introduction: "Please hold while I connect you."
+
+phones: 
+  - "4155551234"
+  - "4155555678"
+
+securityPrompt: "Please enter your four-digit secrity code."
+
+openKey: "9"
+securityCode: "9022"

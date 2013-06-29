@@ -1,0 +1,22 @@
+# When connected to the app, the visitor will hear the introduction and then
+# the messages of each of the choices. The visitor can press '*' and then enter
+# the securityCode to be let in, or they can press 1 or 2 to be connected with
+# those corresponding phone numbers.
+
+introduction: "Welcome to the Pirate Ship."
+
+choices:
+  1: 
+    message: "Press 1 if you are here to see the captain."
+    phones:
+      - "4155551010"
+      - "4155552020"
+  2:
+    message: "Press 2 if you are here to see the first mate."
+    phones:
+      - "4155553030"
+
+securityPrompt: "Please enter your four-digit secrity code."
+
+openKey: "9"
+securityCode: "9022"

@@ -1,0 +1,11 @@
+# When a visitor calls the app, the app will wait 3 seconds for a security
+# interrupt (the '*' key). If the user, presses the star key, they will then be
+# able to enter the security code. If that is correct, the visitor will be let
+# in by playing the openKey. If the visitor does not press the '*' key, the two
+# phone numbers will be called.
+phones: 
+  - "4155551234"
+  - "4155555678"
+
+openKey: "9"
+securityCode: "9022"
