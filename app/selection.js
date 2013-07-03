@@ -30,7 +30,7 @@ module.exports = function (req, res) {
 
     // No valid choice was made.
     else {
-      res.redirect('/')
+      res.redirect('/call')
     }
 
     res.type('text/xml');

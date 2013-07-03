@@ -6,7 +6,8 @@ var http = require('http'),
     config = require('./config.yml'),
     // Route handlers
     index = require('./index'),
-    handler = require('./handler'),
+    call = require('./call'),
+    selection = require('./selection'),
     // Express
     express = require('express'),
     app = express();
@@ -27,8 +28,10 @@ app.use(function (req, res, next) {
 });
 
 app.use(app.router);
-app.get('/', index);
-app.post('/', handler);
+
+app.get('/', index)
+app.get('/call', call);
+app.post('/call', selection);
 
 // We export 'loadConfig' and 'server' for ease of tesing.
 exports.loadConfig = function (path) {

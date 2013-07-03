@@ -10,7 +10,7 @@ Doorman is a NodeJS application that relies on Twilio. You can sign up for a Twi
 
 Once you've signed up for your Twilio account, you will want to take note of your SID and Auth Token. You'll then want to configure the app to your liking by creating a YAML file which will live at `app/config.yml`. 
 
-You will need to deploy the application to a publicly available server and specify the application URL as your Twilio app's "Voice URL".
+You will need to deploy the application to a publicly available server and specify the `/call` path on your application URL as your Twilio app's "Voice URL". (ex. `http://example.com/call`)
 
 Configuration
 -------------

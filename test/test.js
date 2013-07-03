@@ -5,23 +5,20 @@ var twilio = require('twilio'),
 
 process.env.NODE_ENV = 'test';
 var app = require('./../app/app');
-var spy;
+var spyVER;
 
 describe('it passes the correct arguments to validateExpressRequest', function () {
   before(function () {
-    spy = sinon.spy(twilio, 'validateExpressRequest');
     app.loadConfig('./../test/configs/basic.yml');
   });
 
-  after(function () {
-    twilio.validateExpressRequest.restore();
-  });
-
   it('validates requests are from Twilio', function (done) {
+    spyVER = sinon.spy(twilio, 'validateExpressRequest');
     request(app.server)
-      .get('/')
+      .get('/call')
       .end(function () {
-        assert.equal(spy.args[0][1], '1234');
+        assert.equal(spyVER.args[0][1], '1234');
+        twilio.validateExpressRequest.restore();
         done();
       });
   });
@@ -39,7 +36,7 @@ describe('basic config', function () {
 
   it('calls the specified phone numbers', function (done) {
     request(app.server)
-      .get('/')
+      .get('/call')
       .expect(200)
       .expect('Content-Type', 'text/xml')
       .end(function (err, res) {
@@ -61,7 +58,7 @@ describe('basic config with security code', function () {
 
   it('calls the specified phone numbers after waiting for a security code interrupt', function (done) {
     request(app.server)
-      .get('/')
+      .get('/call')
       .expect(200)
       .expect('Content-Type', 'text/xml')
       .end(function (err, res) {
@@ -72,7 +69,7 @@ describe('basic config with security code', function () {
 
   it('handles a security interrupt', function (done) {
     request(app.server)
-      .post('/')
+      .post('/call')
       .send({ Digits: '*' })
       .expect(200)
       .expect('Content-Type', 'text/xml')
@@ -84,7 +81,7 @@ describe('basic config with security code', function () {
 
   it('plays the correct key tone when the security code is entered', function (done) {
     request(app.server)
-      .post('/')
+      .post('/call')
       .send({ Digits: '9022' })
       .expect(200)
       .expect('Content-Type', 'text/xml')
@@ -107,7 +104,7 @@ describe('config with introductions and prompts', function () {
 
   it('greets the user when first called, then connects to phones', function (done) {
     request(app.server)
-      .get('/')
+      .get('/call')
       .expect(200)
       .expect('Content-Type', 'text/xml')
       .end(function (err, res) {
@@ -118,7 +115,7 @@ describe('config with introductions and prompts', function () {
 
   it('prompts your for the security code when recieving the security interrupt', function (done) {
     request(app.server)
-      .post('/')
+      .post('/call')
       .send({ Digits: '*' })
       .expect(200)
       .expect('Content-Type', 'text/xml')
@@ -142,7 +139,7 @@ describe('config with choices', function () {
 
   it('greets the user and announces the choices', function (done) {
     request(app.server)
-      .get('/')
+      .get('/call')
       .expect(200)
       .expect('Content-Type', 'text/xml')
       .end(function (err, res) {
@@ -153,7 +150,7 @@ describe('config with choices', function () {
 
   it('accepts all of the choices presented and makes the appropriate calls', function (done) {
     request(app.server)
-      .post('/')
+      .post('/call')
       .send({ Digits: '1' })
       .expect(200)
       .expect('Content-Type', 'text/xml')
@@ -161,7 +158,7 @@ describe('config with choices', function () {
         assert.equal(res.text, '<?xml version="1.0" encoding="UTF-8"?><Response><Dial><Number>4155551010</Number><Number>4155552020</Number></Dial></Response>');
 
         request(app.server)
-          .post('/')
+          .post('/call')
           .send({ Digits: '2' })
           .expect(200)
           .expect('Content-Type', 'text/xml')
