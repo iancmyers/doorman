@@ -1,6 +1,4 @@
-[![Build Status](https://travis-ci.org/iancmyers/doorman.png?branch=master)](https://travis-ci.org/iancmyers/doorman)
-
-Doorman
+Doorman [![Build Status](https://travis-ci.org/iancmyers/doorman.png?branch=master)](https://travis-ci.org/iancmyers/doorman)
 =======
 
 Doorman allows your apartment entry callbox to call multiple people, dial non-local numbers, and enables automatic entry with a configurable security code.
